@@ -4,6 +4,8 @@
 > 
 > 一个基于 Vue.js 的消息插件，工作原理类似于 elementui / message。
 
+![vue-message-plugin](/src/assets/vue-message-plugin.gif)
+
 ## Build Setup
 
 ``` bash
