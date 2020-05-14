@@ -1,10 +1,4 @@
 <!--
- * @Description:Vue-Message插件 by ScarSu
- * @Author: scarsu001@gmail.com
- * @Date: 2020-05-13 08:28:28
- * @LastEditTime: 2020-05-13 16:58:29
- * @LastEditors: scarsu001@gmail.com
- *
  * 参数 说明 类型 可选值 默认值
  * message 消息文字 string / VNode — —
  * type 主题 string success/warning/info/error info
@@ -33,7 +27,7 @@
           @mouseenter=stopTimer
           @mouseleave=startTimer
           v-if="show">
-        <slot>
+        <slot>//插槽分发v-html数据
             <span v-if="message && !dangerouslyUseHTMLString">{{message}}</span>
             <div v-else v-html="message"></div>
         </slot>
@@ -45,7 +39,7 @@
 <script>
 export default{
   components: {},
-  data () {
+  data () {  //message组件默认数据
     return {
       message: '',
       type: 'info',

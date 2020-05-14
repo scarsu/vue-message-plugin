@@ -18,7 +18,9 @@
 import message from './main.vue'
 import {isVNode} from '@/utils'
 
+//用于export的对象
 const Message = {}
+
 let instances = []
 let seed = 0
 const types = {
@@ -28,6 +30,7 @@ const types = {
   error: 'error'
 }
 
+//Vue插件必须包含install方法
 Message.install = function (Vue) {
   const Message = Vue.component('message', message)
 
@@ -42,12 +45,16 @@ Message.install = function (Vue) {
 
     // message组件实例
     let instance = new Message({
-      data: opt
+      data: opt//将配置选项传入给实例的data
     })
+
+		//处理VNode类型message（使用$slots插槽分发数据
     if (isVNode(instance.message)) {
       instance.$slots.default = [instance.message]
       instance.message = ''
     }
+
+		//挂载dom  并 实例的dom加入body中
     instance.$mount()
     document.body.append(instance.$el)
 
@@ -57,8 +64,10 @@ Message.install = function (Vue) {
       if (this.userOnClose) this.userOnClose()
     }
 
-    // 显示/隐藏
+    // 显示
     instance.show = true
+
+		// 定时隐藏
     let duration = opt.duration || 3000
     instance.timer = setTimeout(() => {
       instance.close()
